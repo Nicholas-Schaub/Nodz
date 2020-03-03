@@ -3,7 +3,7 @@ import re
 import json
 
 from Qt import QtGui, QtCore, QtWidgets
-import nodz_utils as utils
+import Nodz.nodz_utils as utils
 
 
 
@@ -80,7 +80,7 @@ class Nodz(QtWidgets.QGraphicsView):
         inFactor = 1.15
         outFactor = 1 / inFactor
 
-        if event.delta() > 0:
+        if event.angleDelta().y() > 0:
             zoomFactor = inFactor
         else:
             zoomFactor = outFactor
@@ -104,8 +104,8 @@ class Nodz(QtWidgets.QGraphicsView):
 
 
         # Drag view
-        elif (event.button() == QtCore.Qt.MiddleButton and
-              event.modifiers() == QtCore.Qt.AltModifier):
+        elif (event.button() == QtCore.Qt.RightButton and
+              event.modifiers() == QtCore.Qt.NoModifier):
             self.currentState = 'DRAG_VIEW'
             self.prevPos = event.pos()
             self.setCursor(QtCore.Qt.ClosedHandCursor)
